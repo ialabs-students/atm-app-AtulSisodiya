@@ -48,6 +48,7 @@ public class ABCBank {
 
 private static void withdraw(HashMap<Integer, Integer> balance, Scanner sc) {
 	int with2000=0,with500=0,with200=0,with100=0;
+	
 	int cb=currentbalance(balance);
 	int amnt;
 	System.out.println("How many money you want to withdraw?");
@@ -56,30 +57,35 @@ private static void withdraw(HashMap<Integer, Integer> balance, Scanner sc) {
 		System.out.println("Incorrect os insufficient Balance");
 	} 
 	else {
-		if(amnt/2000>0) {
-			with2000=amnt/2000;
-			amnt=amnt-(with2000*2000);
-			balance.replace(2000, (balance.get(2000)-with2000));
-			}
-		if(amnt/500>0) {
-			with500=amnt/500;
-			amnt=amnt-(with500*500);
-			balance.replace(500, (balance.get(500)-with500));
-			}
-		if(amnt/200>0) {
-			with200=amnt/200;
-			amnt=amnt-(with200*200);
-			balance.replace(200, (balance.get(200)-with200));
-			}
-		if(amnt/100>0) {
-			with100=amnt/100;
-			amnt=amnt-(with100*100);
-			balance.replace(100, (balance.get(100)-with100));
-			}
+		while(balance.get(2000)!=0 && 2000<=amnt) {
+            with2000++;
+            balance.replace(2000, balance.get(2000)-1);
+            amnt-=2000;
+        }
+        
+		while(balance.get(500)!=0 && 500<=amnt) {
+            with500++;
+            balance.replace(500, balance.get(500)-1);
+            amnt-=500;
+        }
+		while(balance.get(200)!=0 && 200<=amnt) {
+            with200++;
+            balance.replace(200, balance.get(200)-1);
+            amnt-=200;
+        }
+		while(balance.get(100)!=0 && 100<=amnt) {
+            with100++;
+            balance.replace(100, balance.get(100)-1);
+            amnt-=100;
+        }        
+      System.out.println("Dispensed: 2000s="+with2000+",500s="+with500+",200s="+with200+",100s="+with100);
+        
+        System.out.println("Balance: 2000s="+balance.get(2000)+",500s="+balance.get(500)+",200s="+balance.get(200)+",100s="+balance.get(100)+", Total="+currentbalance(balance));
+ 
+        
 		
-		System.out.println("Dispensed: 2000s="+with2000+",500s="+with500+",200s="+with200+",100s="+with100);
-		System.out.println("Balance: 2000s="+balance.get(2000)+",500s="+balance.get(500)+",200s="+balance.get(200)+",100s="+balance.get(100)+", Total="+currentbalance(balance));
-	}
+		
+		}
 }
 
 private static int currentbalance(HashMap<Integer,Integer> balance) {
